@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="626.0" maxWidth="1114.0" prefHeight="504.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="animelist.main.HelloController">
+   <children>
+      <BorderPane prefHeight="576.0" prefWidth="1016.0" style="-fx-background-color: #fff;">
+         <left>
+            <Pane prefHeight="576.0" prefWidth="449.0" stylesheets="@../css/fullpackstyling.css" BorderPane.alignment="CENTER">
+               <styleClass>
+                  <String fx:value="linear-grad" />
+                  <String fx:value="linear-gradient" />
+               </styleClass>
+               <children>
+                  <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="95.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="94.0" layoutY="372.0" prefHeight="54.0" prefWidth="261.0" styleClass="logo-label" stylesheets="@../css/fullpackstyling.css" text="Anime Watchlist" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="128.0" layoutY="406.0" prefHeight="54.0" prefWidth="193.0" text="by Luis Martínez Gómez" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView layoutX="14.0" layoutY="14.0" opacity="0.7">
+                     <image>
+                        <Image url="@../icons/cross-icon.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+         </left>
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="paneSignUp" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <Label layoutX="84.0" layoutY="106.0" prefHeight="35.0" prefWidth="400.0" styleClass="titular-label" stylesheets="@../css/fullpackstyling.css" text="Sign Up">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="inputSignUpUsername" layoutX="84.0" layoutY="186.0" prefHeight="50.0" prefWidth="400.0" promptText="Username" />
+                        <TextField fx:id="inputSignUpPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" />
+                        <Button fx:id="buttonSignUp" layoutX="312.0" layoutY="387.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="primary-button" stylesheets="@../css/fullpackstyling.css" text="Sign Up" />
+                        <ImageView fx:id="buttonBackSignUp" fitHeight="48.0" fitWidth="48.0" layoutX="36.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/back-icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="paneLogIn" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <Label layoutX="84.0" layoutY="106.0" prefHeight="35.0" prefWidth="400.0" styleClass="titular-label" stylesheets="@../css/fullpackstyling.css" text="Log In">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="inputLogInUsername" layoutX="84.0" layoutY="186.0" prefHeight="50.0" prefWidth="400.0" promptText="Username" />
+                        <TextField fx:id="inputLogInPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" />
+                        <Button fx:id="buttonLogIn" layoutX="312.0" layoutY="387.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="primary-button" stylesheets="@../css/fullpackstyling.css" text="Log in" />
+                        <Button fx:id="buttonSignUpRedirection" layoutX="84.0" layoutY="467.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="400.0" styleClass="secondary-button" stylesheets="@../css/fullpackstyling.css" text="Don't have an account? Sign up" />
+                     </children>
+                  </Pane>
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

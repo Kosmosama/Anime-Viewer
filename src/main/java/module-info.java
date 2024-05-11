@@ -3,6 +3,6 @@ module luis.animelist {
     requires javafx.fxml;
 
 
-    opens luis.animelist to javafx.fxml;
-    exports luis.animelist;
+    opens animelist.main to javafx.fxml;
+    exports animelist.main;
 }

@@ -1,0 +1,68 @@
+/* Left pane gradient */
+
+.linear-grad {
+    -fx-background-color: linear-gradient(to top right, #404040, #202020);
+}
+
+/* Primary button */
+
+.primary-button {
+    -fx-background-color: linear-gradient(to top right, #404040, #202020);
+    -fx-text-fill: #fff;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
+    -fx-padding: 8 16;
+    -fx-font-size: 14;
+    -fx-font-family: "Arial";
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: linear-gradient(to top right, #606060, #404040);
+}
+
+.primary-button:pressed {
+    -fx-background-color: linear-gradient(to top right, #202020, #101010);
+}
+
+/* Secondary button */
+
+.secondary-button {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to top right, #404040, #202020);
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-text-fill: #404040;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
+    -fx-padding: 8 16;
+    -fx-font-size: 14;
+    -fx-font-family: "Arial";
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to top right, #606060, #404040);
+}
+
+.secondary-button:pressed {
+    -fx-text-fill: #fff;
+    -fx-background-color: linear-gradient(to top right, #202020, #101010);
+}
+
+/* Titular label */
+
+.titular-label {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: #404040;
+    -fx-font-family: "Arial";
+}
+
+/* Logo label */
+
+.logo-label {
+    -fx-font-size: 34;
+    font-family: Arial;
+}
