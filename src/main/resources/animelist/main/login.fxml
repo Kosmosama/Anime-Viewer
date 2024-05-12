@@ -34,9 +34,9 @@
                         <Font name="Arial" size="12.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="exitButton" layoutX="14.0" layoutY="14.0" onMouseClicked="#exitProgram" opacity="0.9" styleClass="image-button">
+                  <ImageView fx:id="exitButton" layoutX="14.0" layoutY="14.0" onMouseClicked="#exitProgram" opacity="0.8" styleClass="image-button">
                      <image>
-                        <Image url="@../icons/cross-icon.png" />
+                        <Image url="@../icons/cross-icons/white/48x48.png" />
                      </image>
                   </ImageView>
                </children></Pane>
@@ -48,15 +48,15 @@
                      <children>
                         <Label layoutX="84.0" layoutY="106.0" prefHeight="35.0" prefWidth="400.0" styleClass="titular-label" stylesheets="@../css/fullpackstyling.css" text="Sign Up">
                            <font>
-                              <Font name="System Bold" size="24.0" />
+                              <Font name="Arial Bold" size="24.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="inputSignUpUsername" layoutX="84.0" layoutY="186.0" prefHeight="50.0" prefWidth="400.0" promptText="Username" styleClass="log-in-text-field" stylesheets="@../css/fullpackstyling.css" />
+                        <TextField fx:id="inputSignUpUsername" layoutX="84.0" layoutY="186.0" prefHeight="50.0" prefWidth="400.0" promptText="Username" stylesheets="@../css/fullpackstyling.css" />
                         <PasswordField fx:id="inputSignUpPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" styleClass="log-in-text-field" stylesheets="@../css/fullpackstyling.css" />
                         <Button fx:id="buttonSignUp" layoutX="312.0" layoutY="387.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="primary-button" stylesheets="@../css/fullpackstyling.css" text="Sign Up" />
                         <ImageView fx:id="buttonBackSignUp" fitHeight="48.0" fitWidth="48.0" layoutX="36.0" layoutY="498.0" onMouseClicked="#backToLogIn" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
                            <image>
-                              <Image url="@../icons/back-icon.png" />
+                              <Image url="@../icons/back-icons/back-icon-left.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -68,9 +68,9 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="inputLogInUsername" layoutX="84.0" layoutY="186.0" prefHeight="50.0" prefWidth="400.0" promptText="Username" styleClass="log-in-text-field" stylesheets="@../css/fullpackstyling.css" />
-                        <PasswordField fx:id="inputLogInPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" styleClass="log-in-text-field" stylesheets="@../css/fullpackstyling.css" />
-                        <Button fx:id="buttonLogIn" layoutX="312.0" layoutY="387.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="primary-button" stylesheets="@../css/fullpackstyling.css" text="Log in" />
+                        <TextField fx:id="inputLogInUsername" layoutX="84.0" layoutY="186.0" prefHeight="50.0" prefWidth="400.0" promptText="Username" stylesheets="@../css/fullpackstyling.css" />
+                        <PasswordField fx:id="inputLogInPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" stylesheets="@../css/fullpackstyling.css" />
+                        <Button fx:id="buttonLogIn" layoutX="312.0" layoutY="387.0" mnemonicParsing="false" onMouseClicked="#logIn" prefHeight="40.0" prefWidth="175.0" styleClass="primary-button" stylesheets="@../css/fullpackstyling.css" text="Log in" />
                         <Button fx:id="buttonSignUpRedirection" layoutX="84.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#showSignUpPane" prefHeight="55.0" prefWidth="400.0" styleClass="secondary-button" stylesheets="@../css/fullpackstyling.css" text="Don't have an account? Sign up" />
                      </children>
                   </Pane>

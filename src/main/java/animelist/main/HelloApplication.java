@@ -1,5 +1,6 @@
 package animelist.main;
 
+import animelist.common.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,19 +17,9 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1016, 576);
-        stage.setTitle("Anime Watchlist");
-        stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
 
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/animelist/icons/icon.png"))));
+        Utils.stageTinkerer(stage, scene);
 
-        double screenWidth = Screen.getPrimary().getBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getBounds().getHeight();
-        stage.setX((screenWidth - 1016) / 2);
-        stage.setY((screenHeight - 576) / 2);
-
-        stage.show();
     }
 
     public static void main(String[] args) {

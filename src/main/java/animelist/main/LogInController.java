@@ -1,8 +1,13 @@
 package animelist.main;
 
+import animelist.common.Utils;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -14,6 +19,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class LogInController {
 
@@ -54,53 +61,26 @@ public class LogInController {
     private Pane paneSignUp;
 
     @FXML
+    void logIn(MouseEvent event) {
+        Utils.loadSceneUponButtonPress(event,"/animelist/main/animeList.fxml");
+    }
+
+    @FXML
     void exitProgram(MouseEvent event) {
-        fadeOutAndClose();
+        Utils.fadeOutAndClose(borderPane, exitButton);
     }
 
     @FXML
     void showSignUpPane(MouseEvent event) {
-        fadeInPane(paneSignUp);
-        fadeOutPane(paneLogIn);
+        Utils.fadeInNode(paneSignUp);
+        Utils.fadeOutNode(paneLogIn);
         paneSignUp.toFront();
     }
 
     @FXML
     void backToLogIn(MouseEvent event) {
-        fadeInPane(paneLogIn);
-        fadeOutPane(paneSignUp);
+        Utils.fadeInNode(paneLogIn);
+        Utils.fadeOutNode(paneSignUp);
         paneLogIn.toFront();
-    }
-
-    /* Fade animations */
-
-    private void fadeInPane(Pane pane) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), pane);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-    }
-
-    private void fadeOutPane(Pane pane) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), pane);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.play();
-    }
-
-    private void fadeOutAndClose() {
-        Rectangle overlay = new Rectangle(borderPane.getWidth(), borderPane.getHeight(), Color.BLACK);
-        overlay.setOpacity(0);
-
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(400), overlay);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.setOnFinished((ActionEvent event) -> {
-            Stage stage = (Stage) exitButton.getScene().getWindow();
-            stage.close();
-        });
-
-        borderPane.getChildren().add(overlay);
-        fadeTransition.play();
     }
 }
