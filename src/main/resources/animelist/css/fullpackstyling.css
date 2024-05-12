@@ -13,6 +13,7 @@
     -fx-background-insets: 0;
     -fx-padding: 8 16;
     -fx-font-size: 14;
+    -fx-font-weight: bold;
     -fx-font-family: "Arial";
     -fx-cursor: hand;
 }
@@ -23,6 +24,8 @@
 
 .primary-button:pressed {
     -fx-background-color: linear-gradient(to top right, #202020, #101010);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
 }
 
 /* Secondary button */
@@ -49,6 +52,8 @@
 .secondary-button:pressed {
     -fx-text-fill: #fff;
     -fx-background-color: linear-gradient(to top right, #202020, #101010);
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
 }
 
 /* Titular label */
@@ -65,4 +70,37 @@
 .logo-label {
     -fx-font-size: 34;
     font-family: Arial;
+}
+
+/* Image as button */
+
+.image-button {
+    -fx-cursor: hand;
+}
+
+.image-button:hover {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.image-button:pressed {
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
+}
+
+/* Log In/Sign up Text field */
+
+.log-in-text-field {
+    -fx-text-fill: linear-gradient(to top right, #404040, #202020);
+    -fx-font-size: 14;
+    -fx-font-family: "Arial";
+    -fx-padding: 5;
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.log-in-text-field:focused {
+    -fx-border-color: linear-gradient(to top right, #404040, #202020);
 }
