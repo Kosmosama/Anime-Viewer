@@ -20,7 +20,16 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Utility class providing common functions for working with JavaFX applications.
+ */
 public class Utils {
+    /**
+     * Fades out a {@link BorderPane} and closes the stage containing the specified button.
+     *
+     * @param borderPane The BorderPane to fade out.
+     * @param button     The ImageView button used to locate the stage to close.
+     */
     public static void fadeOutAndClose(BorderPane borderPane, ImageView button) {
         Rectangle overlay = new Rectangle(borderPane.getWidth(), borderPane.getHeight(), Color.BLACK);
         overlay.setOpacity(0);
@@ -37,6 +46,12 @@ public class Utils {
         fadeTransition.play();
     }
 
+    /**
+     * Loads a new scene specified by the scenePath upon a button press event.
+     *
+     * @param event     The MouseEvent triggering the scene change.
+     * @param scenePath The path to the FXML file of the scene to load.
+     */
     public static void loadSceneUponButtonPress(MouseEvent event, String scenePath) {
         try {
             FXMLLoader loader = new FXMLLoader(Utils.class.getResource(scenePath));
@@ -54,6 +69,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Configures the provided stage with specified attributes and shows it.
+     *
+     * @param stage The stage to configure.
+     * @param scene The scene to set for the stage.
+     */
     public static void stageTinkerer(Stage stage, Scene scene)
     {
         stage.setTitle("Anime Watchlist");
@@ -71,6 +92,11 @@ public class Utils {
         stage.show();
     }
 
+    /**
+     * Fades in a JavaFX Node.
+     *
+     * @param node The node to fade in.
+     */
     public static void fadeInNode(Node node) {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), node);
         fadeTransition.setFromValue(0);
@@ -78,6 +104,11 @@ public class Utils {
         fadeTransition.play();
     }
 
+    /**
+     * Fades out a JavaFX Node.
+     *
+     * @param node The node to fade out.
+     */
     public static void fadeOutNode(Node node) {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), node);
         fadeTransition.setFromValue(1);
