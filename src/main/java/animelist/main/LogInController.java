@@ -1,26 +1,15 @@
 package animelist.main;
 
 import animelist.common.Utils;
-import javafx.animation.FadeTransition;
+import animelist.common.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
-import javafx.util.Duration;
-
-import java.io.IOException;
 
 public class LogInController {
 
@@ -61,8 +50,65 @@ public class LogInController {
     private Pane paneSignUp;
 
     @FXML
+    private ImageView loginShowPasswordButton;
+
+    @FXML
+    private ImageView signupShowPasswordButton;
+
+    @FXML
+    private TextField loginVisiblePasswordTextField;
+
+    @FXML
+    private TextField signupVisiblePasswordTextField;
+
+    Image notVisibleEye = new Image("animelist/icons/eye-icons/not-visible/black/24x24.png");
+    Image visibleEye = new Image("animelist/icons/eye-icons/visible/black/24x24.png");
+
+    @FXML
     void logIn(MouseEvent event) {
-        Utils.loadSceneUponButtonPress(event,"/animelist/main/animeList.fxml");
+        String username = inputLogInUsername.getText();
+        String password = inputLogInPassword.getText();
+
+        // Check if username and password are not empty
+        if (username.isEmpty() || password.isEmpty()) {
+            Utils.showAlert("Please enter both username and password.");
+            return;
+        }
+
+        // Authenticate user
+        User user = new User(username, password);
+        if (user.exists() == 1) {
+            Utils.loadSceneUponButtonPress(event, "/animelist/main/animeList.fxml"); // give parameters to the next scene to show User: name or Admin: name
+        } else {
+            Utils.showAlert("Invalid username or password.");
+        }
+
+        // if user is admin -> log in as admin
+    }
+
+    @FXML
+    void signUp(ActionEvent event) {
+        String username = inputSignUpUsername.getText();
+        String password = inputSignUpPassword.getText();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            Utils.showAlert("Please enter both username and password.");
+            return;
+        }
+
+        User newUser = new User(username.toLowerCase(), password);
+        if (newUser.exists() == 0) {
+            Utils.showAlert("Username already exists. Please choose a different username.");
+            return;
+        }
+
+        newUser.saveUser();
+
+        // #TODO Handle admin signup
+        // if admin is checked
+            // sign up as admin
+
+        Utils.showFeedbackAlert("User signed up successfully!");
     }
 
     @FXML
@@ -72,6 +118,9 @@ public class LogInController {
 
     @FXML
     void showSignUpPane(MouseEvent event) {
+        inputLogInUsername.setText("");
+        inputLogInPassword.setText("");
+
         Utils.fadeInNode(paneSignUp);
         Utils.fadeOutNode(paneLogIn);
         paneSignUp.toFront();
@@ -79,8 +128,43 @@ public class LogInController {
 
     @FXML
     void backToLogIn(MouseEvent event) {
+        inputSignUpUsername.setText("");
+        inputSignUpPassword.setText("");
+
         Utils.fadeInNode(paneLogIn);
         Utils.fadeOutNode(paneSignUp);
         paneLogIn.toFront();
+    }
+
+    @FXML
+    void loginShowPassword(MouseEvent event) {
+        inputLogInPassword.setVisible(false);
+        loginVisiblePasswordTextField.setVisible(true);
+        loginShowPasswordButton.setImage(visibleEye);
+        loginVisiblePasswordTextField.setText(inputLogInPassword.getText());
+    }
+
+    @FXML
+    void loginHidePassword(MouseEvent event) {
+        loginVisiblePasswordTextField.setVisible(false);
+        inputLogInPassword.setVisible(true);
+        loginShowPasswordButton.setImage(notVisibleEye);
+        inputLogInPassword.setText(loginVisiblePasswordTextField.getText());
+    }
+
+    @FXML
+    void signupShowPassword(MouseEvent event) {
+        inputSignUpPassword.setVisible(false);
+        signupVisiblePasswordTextField.setVisible(true);
+        signupShowPasswordButton.setImage(visibleEye);
+        signupVisiblePasswordTextField.setText(inputSignUpPassword.getText());
+    }
+
+    @FXML
+    void signupHidePassword(MouseEvent event) {
+        signupVisiblePasswordTextField.setVisible(false);
+        inputSignUpPassword.setVisible(true);
+        signupShowPasswordButton.setImage(notVisibleEye);
+        inputSignUpPassword.setText(signupVisiblePasswordTextField.getText());
     }
 }

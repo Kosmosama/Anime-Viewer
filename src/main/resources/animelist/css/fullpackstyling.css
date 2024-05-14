@@ -106,6 +106,7 @@
 }
 
 /* Table View */
+
 .table-view {
     -fx-background-color: transparent;
     -fx-text-fill: #fff;
@@ -142,3 +143,4 @@
     -fx-background-color: linear-gradient(to top right, #606060, #404040);
     -fx-text-fill: #fff;
 }
+

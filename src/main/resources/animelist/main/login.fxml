@@ -52,13 +52,19 @@
                            </font>
                         </Label>
                         <TextField fx:id="inputSignUpUsername" layoutX="84.0" layoutY="186.0" prefHeight="50.0" prefWidth="400.0" promptText="Username" stylesheets="@../css/fullpackstyling.css" />
-                        <PasswordField fx:id="inputSignUpPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" styleClass="log-in-text-field" stylesheets="@../css/fullpackstyling.css" />
-                        <Button fx:id="buttonSignUp" layoutX="312.0" layoutY="387.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" styleClass="primary-button" stylesheets="@../css/fullpackstyling.css" text="Sign Up" />
+                        <Button fx:id="signUp" layoutX="312.0" layoutY="387.0" mnemonicParsing="false" onAction="#signUp" prefHeight="40.0" prefWidth="175.0" styleClass="primary-button" stylesheets="@../css/fullpackstyling.css" text="Sign Up" />
                         <ImageView fx:id="buttonBackSignUp" fitHeight="48.0" fitWidth="48.0" layoutX="36.0" layoutY="498.0" onMouseClicked="#backToLogIn" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
                            <image>
                               <Image url="@../icons/back-icons/back-icon-left.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="signupShowPasswordButton" layoutX="30.0" layoutY="301.0" onMouseEntered="#signupShowPassword" onMouseExited="#signupHidePassword" opacity="0.8" style="-fx-cursor: hand;">
+                           <image>
+                              <Image url="@../icons/eye-icons/not-visible/black/24x24.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="signupVisiblePasswordTextField" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password-visible" stylesheets="@../css/fullpackstyling.css" />
+                        <PasswordField fx:id="inputSignUpPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" styleClass="log-in-text-field" stylesheets="@../css/fullpackstyling.css" />
                      </children>
                   </Pane>
                   <Pane fx:id="paneLogIn" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
@@ -69,9 +75,15 @@
                            </font>
                         </Label>
                         <TextField fx:id="inputLogInUsername" layoutX="84.0" layoutY="186.0" prefHeight="50.0" prefWidth="400.0" promptText="Username" stylesheets="@../css/fullpackstyling.css" />
-                        <PasswordField fx:id="inputLogInPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" stylesheets="@../css/fullpackstyling.css" />
                         <Button fx:id="buttonLogIn" layoutX="312.0" layoutY="387.0" mnemonicParsing="false" onMouseClicked="#logIn" prefHeight="40.0" prefWidth="175.0" styleClass="primary-button" stylesheets="@../css/fullpackstyling.css" text="Log in" />
                         <Button fx:id="buttonSignUpRedirection" layoutX="84.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#showSignUpPane" prefHeight="55.0" prefWidth="400.0" styleClass="secondary-button" stylesheets="@../css/fullpackstyling.css" text="Don't have an account? Sign up" />
+                        <ImageView fx:id="loginShowPasswordButton" layoutX="30.0" layoutY="301.0" onMouseEntered="#loginShowPassword" onMouseExited="#loginHidePassword" opacity="0.8" style="-fx-cursor: hand;">
+                           <image>
+                              <Image url="@../icons/eye-icons/not-visible/black/24x24.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="loginVisiblePasswordTextField" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password-visible" stylesheets="@../css/fullpackstyling.css" />
+                        <PasswordField fx:id="inputLogInPassword" layoutX="84.0" layoutY="288.0" prefHeight="50.0" prefWidth="400.0" promptText="Password" stylesheets="@../css/fullpackstyling.css" />
                      </children>
                   </Pane>
                </children>

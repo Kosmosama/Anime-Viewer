@@ -1,0 +1,3 @@
+luis,luis,admin
+test,test,user
+asd,asd,user

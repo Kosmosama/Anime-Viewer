@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -90,6 +92,34 @@ public class Utils {
         stage.setY((screenHeight - 576) / 2);
 
         stage.show();
+    }
+
+    /**
+     * Displays an alert dialog with the specified message.
+     *
+     * @param message The message to display in the alert dialog.
+     */
+    public static void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Displays an alert dialog for feedback with the specified message.
+     *
+     * @param message The message to display in the alert dialog.
+     */
+    public static void showFeedbackAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Feedback");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 
     /**

@@ -13,7 +13,6 @@ public class Application extends javafx.application.Application {
         Scene scene = new Scene(fxmlLoader.load(), 1016, 576);
 
         Utils.stageTinkerer(stage, scene);
-
     }
 
     public static void main(String[] args) {
