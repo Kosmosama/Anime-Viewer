@@ -1,13 +1,18 @@
 package animelist.main;
 
-import animelist.common.Utils;
+import animelist.common.list_related.Anime;
+import animelist.common.other.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 
 public class AnimeListController {
 
@@ -28,9 +33,6 @@ public class AnimeListController {
 
     @FXML
     private TextField alSearchTextField;
-
-    @FXML
-    private TableView<?> alTable;
 
     @FXML
     private BorderPane animeListBorderPane;
@@ -63,7 +65,55 @@ public class AnimeListController {
     private TextField wlSearchTextField;
 
     @FXML
-    private TableView<?> wlTable;
+    private TableView<Anime> wlTable;
+
+    @FXML
+    private TableView<Anime> alTable;
+
+    @FXML
+    private TableColumn<Anime, String> alImageColumn;
+
+    @FXML
+    private TableColumn<Anime, String> alNameColumn;
+
+    @FXML
+    private TableColumn<Anime, Integer> alEpisodesColumn;
+
+    @FXML
+    private TableColumn<Anime, Integer> alYearColumn;
+
+    @FXML
+    private TableColumn<Anime, Float> alScoreColumn;
+
+    @FXML
+    private TableColumn<Anime, String> alGenresColumn;
+
+    ObservableList<Anime> data;
+
+    @FXML
+    public void initialize() {
+        alImageColumn.setCellValueFactory(new PropertyValueFactory("image"));
+        alNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        alEpisodesColumn.setCellValueFactory(new PropertyValueFactory("episodes"));
+        alYearColumn.setCellValueFactory(new PropertyValueFactory("year"));
+        alScoreColumn.setCellValueFactory(new PropertyValueFactory("score"));
+        alGenresColumn.setCellValueFactory(new PropertyValueFactory("genre"));
+
+        data = FXCollections.observableArrayList();
+
+        for (int i = 1; i <= 30; i++) {
+            data.add(new Anime(
+                    "imageURL" + i,
+                    "Anime " + i,
+                    "Genre " + i,
+                    12 + (i % 24),
+                    2000 + (i % 24),
+                    7.0f + (i % 3)
+            ));
+        }
+
+        alTable.setItems(data);
+    }
 
     @FXML
     void exitProgramWl(MouseEvent event) {

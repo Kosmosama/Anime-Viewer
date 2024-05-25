@@ -1,13 +1,11 @@
-package animelist.common;
-
-import animelist.interfaces.IFilterable;
-
-import java.util.List;
+package animelist.common.list_related;
 
 public class Anime implements Comparable<Anime> {
-    private String image;
+    private int id;
+    private String image; // change later
     private String name;
-    private List<String> genres;
+//    private List<String> genres;
+    private String genre;
     private int episodes;
     private int year;
     private float score;
@@ -16,15 +14,15 @@ public class Anime implements Comparable<Anime> {
      * Constructs a new Anime object with the specified attributes.
      * @param image The image URL of the anime.
      * @param name The name of the anime.
-     * @param genres The list of genres associated with the anime.
+     * @param genre The list of genres associated with the anime.
      * @param episodes The number of episodes of the anime.
      * @param year The release year of the anime.
      * @param score The score/rating of the anime.
      */
-    public Anime(String image, String name, List<String> genres, int episodes, int year, float score) {
+    public Anime(String image, String name, String genre, int episodes, int year, float score) { // List<String> genres
         this.image = image;
         this.name = name;
-        this.genres = genres;
+        this.genre = genre;
         this.episodes = episodes;
         this.year = year;
         this.score = score;
@@ -48,7 +46,7 @@ public class Anime implements Comparable<Anime> {
         return "Anime{" +
                 "image='" + image + '\'' +
                 ", name='" + name + '\'' +
-                ", genres=" + genres +
+                ", genres=" + genre +
                 ", episodes=" + episodes +
                 ", year=" + year +
                 ", score=" + score +
@@ -71,12 +69,12 @@ public class Anime implements Comparable<Anime> {
         this.name = name;
     }
 
-    public List<String> getGenres() {
-        return genres;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setGenres(List<String> genres) {
-        this.genres = genres;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public int getEpisodes() {
@@ -101,6 +99,14 @@ public class Anime implements Comparable<Anime> {
 
     public void setScore(float score) {
         this.score = score;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

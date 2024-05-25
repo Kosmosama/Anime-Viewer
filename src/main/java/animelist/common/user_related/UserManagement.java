@@ -1,4 +1,4 @@
-package animelist.common;
+package animelist.common.user_related;
 
 /**
  * Abstract class representing user management functionality.

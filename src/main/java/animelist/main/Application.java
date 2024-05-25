@@ -1,6 +1,6 @@
 package animelist.main;
 
-import animelist.common.Utils;
+import animelist.common.other.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

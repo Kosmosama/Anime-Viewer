@@ -1,7 +1,7 @@
 package animelist.main;
 
-import animelist.common.Utils;
-import animelist.common.User;
+import animelist.common.other.*;
+import animelist.common.user_related.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

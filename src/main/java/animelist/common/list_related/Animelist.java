@@ -1,5 +1,6 @@
-package animelist.common;
+package animelist.common.list_related;
 
+import animelist.common.list_related.Anime;
 import animelist.interfaces.IFilterable;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package animelist.common;
+package animelist.common.user_related;
 
 import java.io.*;
 

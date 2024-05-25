@@ -1,4 +1,6 @@
-package animelist.common;
+package animelist.common.user_related;
+
+import animelist.common.user_related.User;
 
 import java.io.FileWriter;
 import java.io.IOException;

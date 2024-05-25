@@ -1,4 +1,4 @@
-package animelist.common;
+package animelist.common.list_related;
 
 import animelist.interfaces.IFilterable;
 
