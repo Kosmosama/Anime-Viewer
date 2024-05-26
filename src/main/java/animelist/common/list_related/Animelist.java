@@ -1,62 +1,55 @@
 package animelist.common.list_related;
 
-import animelist.common.list_related.Anime;
 import animelist.interfaces.IFilterable;
-
-import java.util.ArrayList;
-import java.util.List;
+import animelist.common.other.AnimeService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Represents an animelist containing anime.
  */
 public class Animelist implements IFilterable {
-    private List<Anime> animelist;
+    private ObservableList<Anime> animelist;
+    private AnimeService animeService;
 
     /**
      * Constructs a new empty Animelist.
      */
     public Animelist() {
-        this.animelist = new ArrayList<>();
+        this.animeService = new AnimeService();
+        this.animelist = FXCollections.observableArrayList();
+        fetchAnimesFromService();
     }
 
     /**
-     * Checks if the given anime is banned in the Animelist.
-     * @param anime The anime to check.
-     * @return true if the anime is banned, false otherwise.
+     * Fetches anime data using AnimeService.
      */
-    public boolean isBanned(Anime anime) {
-        return false;
+    private void fetchAnimesFromService() {
+        this.animelist.addAll(animeService.fetchAnimes());
     }
 
     /**
-     * Adds an anime to the Animelist.
-     * @param anime The anime to add.
+     * Gets the ObservableList of animes.
+     * @return ObservableList of animes.
      */
+    public ObservableList<Anime> getAnimelist() {
+        return animelist;
+    }
+
+    // Métodos adicionales de la clase Animelist
+
     public void addAnime(Anime anime) {
-        // Add to the List
-        // Add to the file
+        animelist.add(anime);
     }
 
-    /**
-     * Removes an anime from the Animelist.
-     * @param anime The anime to remove.
-     */
     public void removeAnime(Anime anime) {
-        // Remove from the List
-        // Remove from the file
+        animelist.remove(anime);
     }
 
-    /**
-     * Filters the list of anime in the Animelist.
-     * This method should be implemented to perform filtering operations on the list of anime.
-     */
     public void filterList() {
+        // Implementar filtrado según criterios
     }
 
-    /**
-     * Returns a string representation of the Animelist.
-     * @return A string representation of the Animelist.
-     */
     @Override
     public String toString() {
         return "Animelist{" +
