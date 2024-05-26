@@ -4,18 +4,16 @@ import animelist.common.list_related.Anime;
 import animelist.common.list_related.Animelist;
 import animelist.common.other.Utils;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.collections.FXCollections;
 
 public class AnimeListController {
-    private static final int ROWS_PER_PAGE = 13; // Temporary
+    private static final int ROWS_PER_PAGE = 14;
     private int currentPage = 0;
 
     @FXML
@@ -119,15 +117,35 @@ public class AnimeListController {
 
     @FXML
     public void initialize() {
-        alImageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
+        alImageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
         alNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         alEpisodesColumn.setCellValueFactory(new PropertyValueFactory<>("episodes"));
         alYearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
         alScoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         alGenresColumn.setCellValueFactory(new PropertyValueFactory<>("genre"));
 
-        animelist = new Animelist();
+        alImageColumn.setCellFactory(param -> new TableCell<>() {
+            private final ImageView imageView = new ImageView();
+            {
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            }
 
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setGraphic(null);
+                } else {
+                    Image image = new Image(item);
+                    imageView.setImage(image);
+                    imageView.setFitWidth(80);
+                    imageView.setPreserveRatio(true);
+                    setGraphic(imageView);
+                }
+            }
+        });
+
+        animelist = new Animelist();
         updateTable();
     }
 

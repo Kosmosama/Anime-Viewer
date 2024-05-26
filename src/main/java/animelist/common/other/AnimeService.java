@@ -42,14 +42,18 @@ public class AnimeService {
                 for (int i = 0; i < dataArray.length(); i++) {
                     JSONObject animeJson = dataArray.getJSONObject(i);
 
+                    JSONObject images = animeJson.getJSONObject("images");
+                    String imageUrl = images.getJSONObject("jpg").getString("image_url");
+
                     Anime anime = new Anime(
-                            Integer.toString(animeJson.optInt("mal_id", 0)),
+                            imageUrl,
                             animeJson.getString("title"),
                             animeJson.has("genres") && !animeJson.getJSONArray("genres").isEmpty() ? animeJson.getJSONArray("genres").getJSONObject(0).getString("name") : "N/A",
                             animeJson.optInt("episodes", 0),
                             animeJson.getJSONObject("aired").getJSONObject("prop").getJSONObject("from").optInt("year", 0),
                             (float) animeJson.optDouble("score", 0.0)
                     );
+
                     animeList.add(anime);
                 }
             }

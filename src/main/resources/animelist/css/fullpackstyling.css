@@ -104,5 +104,3 @@
 .text-field:focused {
     -fx-border-color: linear-gradient(to top right, #404040, #202020);
 }
-
-/* Table View */

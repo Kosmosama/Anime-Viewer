@@ -2,9 +2,8 @@ package animelist.common.list_related;
 
 public class Anime implements Comparable<Anime> {
     private int id;
-    private String image; // change later
+    private String imageUrl;
     private String name;
-//    private List<String> genres;
     private String genre;
     private int episodes;
     private int year;
@@ -12,20 +11,20 @@ public class Anime implements Comparable<Anime> {
 
     /**
      * Constructs a new Anime object with the specified attributes.
-     * @param image The image URL of the anime.
+     * @param imageUrl The image URL of the anime.
      * @param name The name of the anime.
      * @param genre The list of genres associated with the anime.
      * @param episodes The number of episodes of the anime.
      * @param year The release year of the anime.
      * @param score The score/rating of the anime.
      */
-    public Anime(String image, String name, String genre, int episodes, int year, float score) { // List<String> genres
-        this.image = image;
+    public Anime(String imageUrl, String name, String genre, int episodes, int year, float score) {
         this.name = name;
         this.genre = genre;
         this.episodes = episodes;
         this.year = year;
         this.score = score;
+        this.imageUrl = imageUrl;
     }
 
     /**
@@ -44,7 +43,7 @@ public class Anime implements Comparable<Anime> {
     @Override
     public String toString() {
         return "Anime{" +
-                "image='" + image + '\'' +
+                "image='" + imageUrl + '\'' +
                 ", name='" + name + '\'' +
                 ", genres=" + genre +
                 ", episodes=" + episodes +
@@ -53,12 +52,12 @@ public class Anime implements Comparable<Anime> {
                 '}';
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void getImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {
