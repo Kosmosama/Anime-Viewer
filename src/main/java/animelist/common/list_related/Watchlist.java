@@ -56,7 +56,6 @@ public class Watchlist implements IFilterable {
      */
     public void addAnime(Anime anime, String username) {
         watchlist.add(anime);
-        System.out.println(username);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/animelist/data/watchlists/" + username + "_watchlist.txt", true))) {
             writer.write(String.valueOf(anime.getId()));
             writer.newLine();

@@ -238,9 +238,6 @@ public class AnimeListController {
 
         animelist = new Animelist();
         updateTable();
-
-//        watchlist = new Watchlist(username);
-//        updateWatchlistTable();
     }
 
     private void setupColumns() {
@@ -294,7 +291,6 @@ public class AnimeListController {
         column.setCellFactory(param -> new TableCell<>() {
             private final Button banButton = new Button("Ban");
             private final Button watchlistButton = new Button("Add to Watchlist");
-
             {
                 banButton.setOnAction(event -> {
                     Anime anime = getTableView().getItems().get(getIndex());
@@ -342,7 +338,7 @@ public class AnimeListController {
                     setGraphic(null);
                 } else {
                     VBox vBox = new VBox(5);
-                    getChildren().add(removeButton);
+                    vBox.getChildren().add(removeButton);
                     setGraphic(vBox);
                 }
             }

@@ -50,13 +50,13 @@
                <children>
                   <TableView fx:id="wlTable" layoutY="50.0" prefHeight="357.0" prefWidth="828.0">
                      <columns>
-                        <TableColumn fx:id="wlImageColumn" prefWidth="99.0" text="image" />
-                        <TableColumn fx:id="wlNameColumn" prefWidth="165.0" text="name" />
-                        <TableColumn fx:id="wlEpisodesColumn" prefWidth="95.0" text="episodes" />
-                        <TableColumn fx:id="wlYearColumn" prefWidth="85.0" text="year" />
+                        <TableColumn fx:id="wlImageColumn" prefWidth="99.0" text="Image" />
+                        <TableColumn fx:id="wlNameColumn" prefWidth="165.0" text="Name" />
+                        <TableColumn fx:id="wlEpisodesColumn" prefWidth="95.0" text="Episodes" />
+                        <TableColumn fx:id="wlYearColumn" prefWidth="85.0" text="Year" />
                         <TableColumn fx:id="wlScoreColumn" prefWidth="95.0" text="MAL score" />
-                        <TableColumn fx:id="wlGenresColumn" prefWidth="93.0" text="genres" />
-                        <TableColumn fx:id="wlActionColumn" prefWidth="195.0" text="actions" />
+                        <TableColumn fx:id="wlGenresColumn" prefWidth="93.0" text="Genre" />
+                        <TableColumn fx:id="wlActionColumn" prefWidth="195.0" text="Actions" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -126,13 +126,13 @@
                <children>
                   <TableView fx:id="alTable" layoutY="50.0" prefHeight="357.0" prefWidth="828.0">
                      <columns>
-                        <TableColumn fx:id="alImageColumn" prefWidth="99.0" text="image" />
-                        <TableColumn fx:id="alNameColumn" prefWidth="165.0" text="name" />
-                        <TableColumn fx:id="alEpisodesColumn" prefWidth="95.0" text="episodes" />
-                        <TableColumn fx:id="alYearColumn" prefWidth="85.0" text="year" />
+                        <TableColumn fx:id="alImageColumn" prefWidth="99.0" text="Image" />
+                        <TableColumn fx:id="alNameColumn" prefWidth="165.0" text="Name" />
+                        <TableColumn fx:id="alEpisodesColumn" prefWidth="95.0" text="Episodes" />
+                        <TableColumn fx:id="alYearColumn" prefWidth="85.0" text="Year" />
                         <TableColumn fx:id="alScoreColumn" prefWidth="95.0" text="MAL score" />
-                        <TableColumn fx:id="alGenresColumn" prefWidth="94.0" text="genres" />
-                        <TableColumn fx:id="alActionColumn" prefWidth="195.0" text="actions" />
+                        <TableColumn fx:id="alGenresColumn" prefWidth="94.0" text="Genre" />
+                        <TableColumn fx:id="alActionColumn" prefWidth="195.0" text="Actions" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
