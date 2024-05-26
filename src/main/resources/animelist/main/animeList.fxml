@@ -142,7 +142,7 @@
          <left>
             <Pane prefHeight="373.0" prefWidth="91.0" style="-fx-background-color: fff;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="alLeft" fitHeight="53.0" fitWidth="62.0" layoutX="19.0" layoutY="177.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
+                  <ImageView fx:id="alLeft" fitHeight="53.0" fitWidth="62.0" layoutX="19.0" layoutY="177.0" onMouseClicked="#handleLeftButton" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
                      <image>
                         <Image url="@../icons/back-icons/back-icon-left.png" />
                      </image>
@@ -153,7 +153,7 @@
          <right>
             <Pane prefHeight="373.0" prefWidth="97.0" style="-fx-background-color: fff;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="alRight" fitHeight="53.0" fitWidth="62.0" layoutX="22.0" layoutY="177.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
+                  <ImageView fx:id="alRight" fitHeight="53.0" fitWidth="62.0" layoutX="22.0" layoutY="177.0" onMouseClicked="#handleRightButton" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
                      <image>
                         <Image url="@../icons/back-icons/back-icon-right.png" />
                      </image>

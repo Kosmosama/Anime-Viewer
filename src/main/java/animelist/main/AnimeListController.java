@@ -15,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 
 public class AnimeListController {
+    private static final int ROWS_PER_PAGE = 13; // Temporal
+    private int currentPage = 0;
 
     @FXML
     private ImageView alExitButton;
@@ -90,6 +92,33 @@ public class AnimeListController {
 
     ObservableList<Anime> data;
 
+    // #TODO añade cosas a la lista de animes
+    private void updateTable() {
+        int fromIndex = currentPage * ROWS_PER_PAGE;
+        int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, data.size());
+        alTable.setItems(FXCollections.observableArrayList(data.subList(fromIndex, toIndex)));
+
+        alLeft.setVisible(currentPage > 0);
+        alRight.setVisible((currentPage + 1) * ROWS_PER_PAGE < data.size());
+    }
+
+    @FXML
+    void handleLeftButton(MouseEvent event) {
+        if (currentPage > 0) {
+            currentPage--;
+            updateTable();
+        }
+    }
+
+    @FXML
+    void handleRightButton(MouseEvent event) {
+        if ((currentPage + 1) * ROWS_PER_PAGE < data.size()) {
+            currentPage++;
+            updateTable();
+        }
+    }
+
+    // #TODO mete cosas en la tabla de data
     @FXML
     public void initialize() {
         alImageColumn.setCellValueFactory(new PropertyValueFactory("image"));
@@ -112,7 +141,7 @@ public class AnimeListController {
             ));
         }
 
-        alTable.setItems(data);
+        updateTable();
     }
 
     @FXML
