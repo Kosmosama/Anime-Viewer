@@ -46,6 +46,7 @@ public class AnimeService {
                     String imageUrl = images.getJSONObject("jpg").getString("image_url");
 
                     Anime anime = new Anime(
+                            animeJson.optInt("mal_id", 0),
                             imageUrl,
                             animeJson.getString("title"),
                             animeJson.has("genres") && !animeJson.getJSONArray("genres").isEmpty() ? animeJson.getJSONArray("genres").getJSONObject(0).getString("name") : "N/A",

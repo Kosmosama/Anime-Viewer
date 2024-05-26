@@ -77,13 +77,13 @@ public class LogInController {
 
         // Authenticate user
         User user = new User(username, password);
-        if (user.exists() == 1) {
-            Utils.loadSceneUponButtonPress(event, "/animelist/main/animeList.fxml"); // give parameters to the next scene to show User: name or Admin: name
+        int userExists = user.exists();
+        if (userExists > 0) {
+            boolean isAdmin = userExists == 2;
+            Utils.loadAnimeContollerSceneUponButtonPress(event, "/animelist/main/animeList.fxml", username, isAdmin);
         } else {
             Utils.showAlert("Invalid username or password.");
         }
-
-        // if user is admin -> log in as admin
     }
 
     @FXML
@@ -103,10 +103,6 @@ public class LogInController {
         }
 
         newUser.saveUser();
-
-        // #TODO Handle admin signup
-        // if admin is checked
-            // sign up as admin
 
         Utils.showFeedbackAlert("User signed up successfully!");
     }

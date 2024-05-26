@@ -1,5 +1,6 @@
 package animelist.common.other;
 
+import animelist.main.AnimeListController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -45,6 +46,37 @@ public class Utils {
 
         borderPane.getChildren().add(overlay);
         fadeTransition.play();
+    }
+
+    /**
+     * Loads a AnimeListController scene specified by the scenePath upon a button press event.
+     *
+     * @param event     The MouseEvent triggering the scene change.
+     * @param scenePath The path to the FXML file of the scene to load.
+     * @param username  The username of the logged-in user.
+     * @param isAdmin   A boolean indicating whether the user is an admin or not.
+     */
+    public static void loadAnimeContollerSceneUponButtonPress(MouseEvent event, String scenePath, String username, boolean isAdmin) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Utils.class.getResource(scenePath));
+            Parent root = loader.load();
+
+            // Get the controller of the loaded scene
+            AnimeListController animeListController = loader.getController();
+
+            // Pass user's name and admin status to the controller
+            animeListController.setUserInfo(username, isAdmin);
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Stage newStage = new Stage();
+
+            Utils.stageTinkerer(newStage, new Scene(root));
+
+            currentStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

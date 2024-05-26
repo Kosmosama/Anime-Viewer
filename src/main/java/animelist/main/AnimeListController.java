@@ -12,6 +12,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.collections.FXCollections;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class AnimeListController {
     private static final int ROWS_PER_PAGE = 14;
     private int currentPage = 0;
@@ -88,7 +92,34 @@ public class AnimeListController {
     @FXML
     private TableColumn<Anime, String> alGenresColumn;
 
+    @FXML
+    private TableColumn<Anime, String> alActionColumn;
+
+    @FXML
+    private Label alAdminPrivilegesLabel;
+
+    @FXML
+    private Label alUsernameLabel;
+    @FXML
+    private Label wlAdminPrivilegesLabel;
+
+    @FXML
+    private Label wlUsernameLabel;
+
     private Animelist animelist;
+
+    private String username;
+    private boolean isAdmin;
+
+    public void setUserInfo(String username, boolean isAdmin) {
+        this.username = username;
+        alUsernameLabel.setText("User: " + username);
+        wlUsernameLabel.setText("User: " + username);
+
+        this.isAdmin = isAdmin;
+        alAdminPrivilegesLabel.setVisible(isAdmin);
+        wlAdminPrivilegesLabel.setVisible(isAdmin);
+    }
 
     private void updateTable() {
         int fromIndex = currentPage * ROWS_PER_PAGE;
@@ -124,6 +155,7 @@ public class AnimeListController {
         alScoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         alGenresColumn.setCellValueFactory(new PropertyValueFactory<>("genre"));
 
+        // Set images on the table
         alImageColumn.setCellFactory(param -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
             {
@@ -145,7 +177,41 @@ public class AnimeListController {
             }
         });
 
+        // Set buttons on the table
+        alActionColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button banButton = new Button("Ban");
+
+            {
+                banButton.setOnAction(event -> {
+                    Anime anime = getTableView().getItems().get(getIndex());
+                    banAnime(anime);
+                });
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(banButton);
+                }
+            }
+        });
+
         animelist = new Animelist();
+        updateTable();
+    }
+
+    private void banAnime(Anime anime) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/animelist/data/banned/banned.txt", true))) {
+            writer.write(String.valueOf(anime.getId()));
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        animelist.removeAnime(anime);
         updateTable();
     }
 

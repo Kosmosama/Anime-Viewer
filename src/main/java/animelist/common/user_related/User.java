@@ -25,7 +25,7 @@ public class User extends UserManagement implements Comparable<User> {
      */
     @Override
     public void saveUser() {
-        String filename = "src/main/resources/animelist/data/users.txt";
+        String filename = "src/main/resources/animelist/data/users/users.txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename, true))) {
             writer.println(this.username.toLowerCase() + "," + this.password.toLowerCase() + ",user");
         } catch (IOException e) {
@@ -36,10 +36,10 @@ public class User extends UserManagement implements Comparable<User> {
     /**
      * Checks if the user exists in the file and if the password matches.
      *
-     * @return -1 if the user doesn't exist, 0 if only the username is correct, 1 if both the username and password are correct.
+     * @return -1 if the user doesn't exist, 0 if only the username is correct, 1 if both the username and password are correct, 2 if both the username and password are correct and user is an admin.
      */
     public int exists() {
-        String filename = "src/main/resources/animelist/data/users.txt";
+        String filename = "src/main/resources/animelist/data/users/users.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -47,7 +47,11 @@ public class User extends UserManagement implements Comparable<User> {
                 if (userInfo.length >= 3 && userInfo[0].equalsIgnoreCase(username.toLowerCase())) {
                     // Username found, check password
                     if (userInfo[1].equals(password.toLowerCase())) {
-                        // Password matches
+                        if (userInfo[2].equals("admin")) {
+                            // Password matches and it is an admin
+                            return 2;
+                        }
+                        // Password matches and it is not an admin
                         return 1;
                     } else {
                         // Password does not match

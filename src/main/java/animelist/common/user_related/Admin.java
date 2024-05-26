@@ -1,7 +1,5 @@
 package animelist.common.user_related;
 
-import animelist.common.user_related.User;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,7 +24,7 @@ public class Admin extends User {
      */
     @Override
     public void saveUser() {
-        String filename = "src/main/resources/animelist/data/users.txt";
+        String filename = "src/main/resources/animelist/data/users/users.txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename, true))) {
             writer.println(this.getUsername().toLowerCase() + "," + this.getPassword() + ",admin");
         } catch (IOException e) {

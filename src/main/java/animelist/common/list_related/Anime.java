@@ -11,6 +11,7 @@ public class Anime implements Comparable<Anime> {
 
     /**
      * Constructs a new Anime object with the specified attributes.
+     * @param id The id of the anime.
      * @param imageUrl The image URL of the anime.
      * @param name The name of the anime.
      * @param genre The list of genres associated with the anime.
@@ -18,22 +19,24 @@ public class Anime implements Comparable<Anime> {
      * @param year The release year of the anime.
      * @param score The score/rating of the anime.
      */
-    public Anime(String imageUrl, String name, String genre, int episodes, int year, float score) {
+    public Anime(int id, String imageUrl, String name, String genre, int episodes, int year, float score) {
+        this.id = id;
+        this.imageUrl = imageUrl;
         this.name = name;
         this.genre = genre;
         this.episodes = episodes;
         this.year = year;
         this.score = score;
-        this.imageUrl = imageUrl;
     }
 
     /**
-     * Compares this Anime with another Anime based on their names.
+     * Compares this Anime with another Anime based on their ids.
      * @param other The Anime to compare to.
-     * @return A negative integer, zero, or a positive integer as this Anime is less than, equal to, or greater than the specified Anime.
+     * @return A negative integer, zero, or a positive integer as this Anime's id is less than, equal to, or greater than the specified Anime's id.
      */
+    @Override
     public int compareTo(Anime other) {
-        return this.name.compareTo(other.name);
+        return Integer.compare(this.id, other.id);
     }
 
     /**
