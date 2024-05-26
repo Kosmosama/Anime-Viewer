@@ -237,10 +237,10 @@ public class AnimeListController {
         setupColumns();
 
         animelist = new Animelist();
-        watchlist = new Watchlist(username);
-
         updateTable();
-        updateWatchlistTable();
+
+//        watchlist = new Watchlist(username);
+//        updateWatchlistTable();
     }
 
     private void setupColumns() {
@@ -258,11 +258,13 @@ public class AnimeListController {
         wlScoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         wlGenresColumn.setCellValueFactory(new PropertyValueFactory<>("genre"));
 
-        // Set up cell factories for image and action columns
+        // Set up cell factories for image columns
         setupImageColumn(alImageColumn);
         setupImageColumn(wlImageColumn);
-        setupActionColumn(alActionColumn);
-        setupActionColumn(wlActionColumn);
+
+        // Set up cell factories for action columns
+        setupActionColumnAl(alActionColumn);
+        setupActionColumnWl(wlActionColumn);
     }
 
     private void setupImageColumn(TableColumn<Anime, String> column) {
@@ -288,7 +290,7 @@ public class AnimeListController {
         });
     }
 
-    private void setupActionColumn(TableColumn<Anime, String> column) {
+    private void setupActionColumnAl(TableColumn<Anime, String> column) {
         column.setCellFactory(param -> new TableCell<>() {
             private final Button banButton = new Button("Ban");
             private final Button watchlistButton = new Button("Add to Watchlist");
@@ -299,6 +301,7 @@ public class AnimeListController {
                     banAnime(anime);
                 });
                 watchlistButton.setOnAction(event -> {
+                    rescueInitializator();
                     Anime anime = getTableView().getItems().get(getIndex());
                     addToWatchlist(anime);
                 });
@@ -322,6 +325,30 @@ public class AnimeListController {
         });
     }
 
+    private void setupActionColumnWl(TableColumn<Anime, String> column) {
+        column.setCellFactory(param -> new TableCell<>() {
+            private final Button removeButton = new Button("Remove from watchlist");
+            {
+                removeButton.setOnAction(event -> {
+                    Anime anime = getTableView().getItems().get(getIndex());
+                    removeFromWatchlist(anime);
+                });
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    VBox vBox = new VBox(5);
+                    getChildren().add(removeButton);
+                    setGraphic(vBox);
+                }
+            }
+        });
+    }
+
     private void banAnime(Anime anime) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/animelist/data/banned/banned.txt", true))) {
             writer.write(String.valueOf(anime.getId()));
@@ -336,13 +363,20 @@ public class AnimeListController {
     }
 
     private void addToWatchlist(Anime anime) {
-        watchlist.addAnime(anime);
+        watchlist.addAnime(anime, username);
         updateWatchlistTable();
     }
 
     private void removeFromWatchlist(Anime anime) {
-        watchlist.removeAnime(anime);
+        watchlist.removeAnime(anime, username);
         updateWatchlistTable();
+    }
+
+    private void rescueInitializator() {
+        if (watchlist == null) {
+            watchlist = new Watchlist(username);
+            updateWatchlistTable();
+        }
     }
 
     @FXML
@@ -357,6 +391,7 @@ public class AnimeListController {
 
     @FXML
     void showWatchList(MouseEvent event) {
+        rescueInitializator();
         Utils.fadeInNode(watchListBorderPane);
         Utils.fadeOutNode(animeListBorderPane);
         watchListBorderPane.toFront();

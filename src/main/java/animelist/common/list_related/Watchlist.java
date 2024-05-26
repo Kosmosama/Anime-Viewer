@@ -15,8 +15,6 @@ import java.util.List;
 public class Watchlist implements IFilterable {
     private List<Anime> watchlist;
     private AnimeService animeService;
-    private String username;
-    private String filePath;
 
     /**
      * Constructor to create a watchlist for a specific user.
@@ -24,20 +22,17 @@ public class Watchlist implements IFilterable {
      * @param username the username of the user
      */
     public Watchlist(String username) {
-        this.username = username;
         this.animeService = new AnimeService();
         this.watchlist = new ArrayList<>();
 
-        filePath = "src/main/resources/animelist/data/watchlists/" + username + "_watchlist.txt";
-
-        loadWatchlist();
+        loadWatchlist(username);
     }
 
     /**
      * Loads the watchlist from a file.
      */
-    public void loadWatchlist() {
-        File file = new File(filePath);
+    public void loadWatchlist(String username) {
+        File file = new File("src/main/resources/animelist/data/watchlists/" + username + "_watchlist.txt");
         if (file.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
@@ -59,9 +54,10 @@ public class Watchlist implements IFilterable {
      *
      * @param anime the Anime object to add
      */
-    public void addAnime(Anime anime) {
+    public void addAnime(Anime anime, String username) {
         watchlist.add(anime);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+        System.out.println(username);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/animelist/data/watchlists/" + username + "_watchlist.txt", true))) {
             writer.write(String.valueOf(anime.getId()));
             writer.newLine();
         } catch (IOException e) {
@@ -74,9 +70,9 @@ public class Watchlist implements IFilterable {
      *
      * @param anime the Anime object to remove
      */
-    public void removeAnime(Anime anime) {
+    public void removeAnime(Anime anime, String username) {
         watchlist.remove(anime);
-        File file = new File(filePath);
+        File file = new File("src/main/resources/animelist/data/watchlists/" + username + "_watchlist.txt");
         if (file.exists()) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (Anime a : watchlist) {
