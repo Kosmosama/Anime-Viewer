@@ -307,8 +307,8 @@ public class AnimeListController {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                banButton.setStyle(".table-button");
-                watchlistButton.setStyle(".table-button");
+                banButton.getStyleClass().add("table-button");
+                watchlistButton.getStyleClass().add("table-button");
 
                 if (empty) {
                     setGraphic(null);
@@ -338,7 +338,7 @@ public class AnimeListController {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                removeButton.setStyle(".table-button");
+                removeButton.getStyleClass().add("table-button");
 
                 if (empty) {
                     setGraphic(null);
