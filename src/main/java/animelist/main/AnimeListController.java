@@ -291,6 +291,7 @@ public class AnimeListController {
         column.setCellFactory(param -> new TableCell<>() {
             private final Button banButton = new Button("Ban");
             private final Button watchlistButton = new Button("Add to Watchlist");
+
             {
                 banButton.setOnAction(event -> {
                     Anime anime = getTableView().getItems().get(getIndex());
@@ -306,6 +307,9 @@ public class AnimeListController {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
+                banButton.setStyle(".table-button");
+                watchlistButton.setStyle(".table-button");
+
                 if (empty) {
                     setGraphic(null);
                 } else {
@@ -334,6 +338,8 @@ public class AnimeListController {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
+                removeButton.setStyle(".table-button");
+
                 if (empty) {
                     setGraphic(null);
                 } else {

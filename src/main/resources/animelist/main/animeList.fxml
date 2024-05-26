@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -48,9 +47,9 @@
          <center>
             <Pane prefHeight="287.0" prefWidth="1016.0" style="-fx-background-color: fff;" BorderPane.alignment="CENTER">
                <children>
-                  <TableView fx:id="wlTable" layoutY="50.0" prefHeight="357.0" prefWidth="828.0">
+                  <TableView fx:id="wlTable" layoutY="20.0" prefHeight="387.0" prefWidth="828.0">
                      <columns>
-                        <TableColumn fx:id="wlImageColumn" prefWidth="99.0" text="Image" />
+                        <TableColumn fx:id="wlImageColumn" prefWidth="90.0" text="Image" />
                         <TableColumn fx:id="wlNameColumn" prefWidth="165.0" text="Name" />
                         <TableColumn fx:id="wlEpisodesColumn" prefWidth="95.0" text="Episodes" />
                         <TableColumn fx:id="wlYearColumn" prefWidth="85.0" text="Year" />
@@ -62,8 +61,6 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="wlSearchTextField" layoutX="14.0" layoutY="12.0" prefHeight="30.0" prefWidth="709.0" stylesheets="@../css/fullpackstyling.css" />
-                  <Button fx:id="wlFilterButton" layoutX="723.0" layoutY="11.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="primary-button" text="Filter" />
                </children>
             </Pane>
          </center>
@@ -124,10 +121,10 @@
          <center>
             <Pane prefHeight="287.0" prefWidth="1016.0" style="-fx-background-color: fff;" BorderPane.alignment="CENTER">
                <children>
-                  <TableView fx:id="alTable" layoutY="50.0" prefHeight="357.0" prefWidth="828.0">
+                  <TableView fx:id="alTable" layoutY="20.0" prefHeight="387.0" prefWidth="828.0">
                      <columns>
-                        <TableColumn fx:id="alImageColumn" prefWidth="99.0" text="Image" />
-                        <TableColumn fx:id="alNameColumn" prefWidth="165.0" text="Name" />
+                        <TableColumn fx:id="alImageColumn" prefWidth="90.0" text="Image" />
+                        <TableColumn fx:id="alNameColumn" prefWidth="171.0" text="Name" />
                         <TableColumn fx:id="alEpisodesColumn" prefWidth="95.0" text="Episodes" />
                         <TableColumn fx:id="alYearColumn" prefWidth="85.0" text="Year" />
                         <TableColumn fx:id="alScoreColumn" prefWidth="95.0" text="MAL score" />
@@ -138,8 +135,6 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField fx:id="alSearchTextField" layoutX="14.0" layoutY="12.0" prefHeight="30.0" prefWidth="709.0" styleClass="text-field" stylesheets="@../css/fullpackstyling.css" />
-                  <Button fx:id="alFilterButton" layoutX="723.0" layoutY="11.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" styleClass="primary-button" text="Filter" />
                </children>
             </Pane>
          </center>
