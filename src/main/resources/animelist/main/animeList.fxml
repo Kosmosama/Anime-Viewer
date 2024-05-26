@@ -51,12 +51,12 @@
                   <TableView fx:id="wlTable" layoutY="50.0" prefHeight="357.0" prefWidth="828.0">
                      <columns>
                         <TableColumn fx:id="wlImageColumn" prefWidth="99.0" text="image" />
-                        <TableColumn prefWidth="165.0" text="name" />
-                        <TableColumn prefWidth="95.0" text="episodes" />
-                        <TableColumn prefWidth="85.0" text="year" />
-                        <TableColumn prefWidth="95.0" text="MAL score" />
-                        <TableColumn prefWidth="144.0" text="genres" />
-                        <TableColumn prefWidth="144.0" text="actions" />
+                        <TableColumn fx:id="wlNameColumn" prefWidth="165.0" text="name" />
+                        <TableColumn fx:id="wlEpisodesColumn" prefWidth="95.0" text="episodes" />
+                        <TableColumn fx:id="wlYearColumn" prefWidth="85.0" text="year" />
+                        <TableColumn fx:id="wlScoreColumn" prefWidth="95.0" text="MAL score" />
+                        <TableColumn fx:id="wlGenresColumn" prefWidth="144.0" text="genres" />
+                        <TableColumn fx:id="wlActionColumn" prefWidth="144.0" text="actions" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -70,7 +70,7 @@
          <left>
             <Pane prefHeight="373.0" prefWidth="91.0" style="-fx-background-color: fff;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="wlLeft" fitHeight="53.0" fitWidth="62.0" layoutX="19.0" layoutY="177.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
+                  <ImageView fx:id="wlLeft" fitHeight="53.0" fitWidth="62.0" layoutX="19.0" layoutY="177.0" onMouseClicked="#handleLeftButtonWl" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
                      <image>
                         <Image url="@../icons/back-icons/back-icon-left.png" />
                      </image>
@@ -81,7 +81,7 @@
          <right>
             <Pane prefHeight="373.0" prefWidth="97.0" style="-fx-background-color: fff;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="wlRight" fitHeight="53.0" fitWidth="62.0" layoutX="22.0" layoutY="177.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
+                  <ImageView fx:id="wlRight" fitHeight="53.0" fitWidth="62.0" layoutX="22.0" layoutY="177.0" onMouseClicked="#handleRightButtonWl" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
                      <image>
                         <Image url="@../icons/back-icons/back-icon-right.png" />
                      </image>
@@ -146,7 +146,7 @@
          <left>
             <Pane prefHeight="373.0" prefWidth="91.0" style="-fx-background-color: fff;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="alLeft" fitHeight="53.0" fitWidth="62.0" layoutX="19.0" layoutY="177.0" onMouseClicked="#handleLeftButton" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
+                  <ImageView fx:id="alLeft" fitHeight="53.0" fitWidth="62.0" layoutX="19.0" layoutY="177.0" onMouseClicked="#handleLeftButtonAl" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
                      <image>
                         <Image url="@../icons/back-icons/back-icon-left.png" />
                      </image>
@@ -157,7 +157,7 @@
          <right>
             <Pane prefHeight="373.0" prefWidth="97.0" style="-fx-background-color: fff;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="alRight" fitHeight="53.0" fitWidth="62.0" layoutX="22.0" layoutY="177.0" onMouseClicked="#handleRightButton" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
+                  <ImageView fx:id="alRight" fitHeight="53.0" fitWidth="62.0" layoutX="22.0" layoutY="177.0" onMouseClicked="#handleRightButtonAl" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="image-button">
                      <image>
                         <Image url="@../icons/back-icons/back-icon-right.png" />
                      </image>

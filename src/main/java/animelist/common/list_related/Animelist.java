@@ -36,8 +36,6 @@ public class Animelist implements IFilterable {
         return animelist;
     }
 
-    // Métodos adicionales de la clase Animelist
-
     public void addAnime(Anime anime) {
         animelist.add(anime);
     }
@@ -46,8 +44,11 @@ public class Animelist implements IFilterable {
         animelist.remove(anime);
     }
 
+    /**
+     * Filters the list of anime in the Animelist.
+     * This method should be implemented to perform filtering operations on the list of anime.
+     */
     public void filterList() {
-        // Implementar filtrado según criterios
     }
 
     @Override

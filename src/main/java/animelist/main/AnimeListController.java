@@ -20,7 +20,8 @@ import java.util.Set;
 
 public class AnimeListController {
     private static final int ROWS_PER_PAGE = 14;
-    private int currentPage = 0;
+    private int currentPageAl = 0;
+    private int currentPageWl = 0;
 
     @FXML
     private ImageView alExitButton;
@@ -158,6 +159,25 @@ public class AnimeListController {
         }
     }
 
+    // Handle watchlist
+
+    @FXML
+    void handleLeftButtonWl(MouseEvent event) {
+        if (currentPageWl > 0) {
+            currentPageWl--;
+//            updateTable();
+        }
+    }
+
+    @FXML
+    void handleRightButtonWl(MouseEvent event) {
+//        if ((currentPageWl + 1) * ROWS_PER_PAGE < animelist.getWatchlist().size()) {
+//            currentPageWl++;
+//            updateTable();
+//        }
+    }
+
+    // Handle animelist
     private void updateTable() {
         Set<Integer> addedAnimeIds = new HashSet<>();
 
@@ -168,31 +188,32 @@ public class AnimeListController {
             }
         }
 
-        int fromIndex = currentPage * ROWS_PER_PAGE;
+        int fromIndex = currentPageAl * ROWS_PER_PAGE;
         int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, animeList.size());
 
         ObservableList<Anime> subList = FXCollections.observableArrayList(animeList.subList(fromIndex, toIndex));
         alTable.setItems(subList);
 
-        alLeft.setVisible(currentPage > 0);
-        alRight.setVisible((currentPage + 1) * ROWS_PER_PAGE < animeList.size());
+        alLeft.setVisible(currentPageAl > 0);
+        alRight.setVisible((currentPageAl + 1) * ROWS_PER_PAGE < animeList.size());
     }
 
     @FXML
-    void handleLeftButton(MouseEvent event) {
-        if (currentPage > 0) {
-            currentPage--;
+    void handleLeftButtonAl(MouseEvent event) {
+        if (currentPageAl > 0) {
+            currentPageAl--;
             updateTable();
         }
     }
 
     @FXML
-    void handleRightButton(MouseEvent event) {
-        if ((currentPage + 1) * ROWS_PER_PAGE < animelist.getAnimelist().size()) {
-            currentPage++;
+    void handleRightButtonAl(MouseEvent event) {
+        if ((currentPageAl + 1) * ROWS_PER_PAGE < animelist.getAnimelist().size()) {
+            currentPageAl++;
             updateTable();
         }
     }
+    //-----------------------
 
     @FXML
     public void initialize() {
