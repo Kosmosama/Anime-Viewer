@@ -11,10 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.VBox;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AnimeListController {
     private static final int ROWS_PER_PAGE = 14;
@@ -72,6 +74,27 @@ public class AnimeListController {
     private TableView<Anime> wlTable;
 
     @FXML
+    private TableColumn<Anime, String> wlImageColumn;
+
+    @FXML
+    private TableColumn<Anime, String> wlNameColumn;
+
+    @FXML
+    private TableColumn<Anime, Integer> wlEpisodesColumn;
+
+    @FXML
+    private TableColumn<Anime, Integer> wlYearColumn;
+
+    @FXML
+    private TableColumn<Anime, Float> wlScoreColumn;
+
+    @FXML
+    private TableColumn<Anime, String> wlGenresColumn;
+
+    @FXML
+    private TableColumn<Anime, String> wlActionColumn;
+
+    @FXML
     private TableView<Anime> alTable;
 
     @FXML
@@ -100,6 +123,7 @@ public class AnimeListController {
 
     @FXML
     private Label alUsernameLabel;
+
     @FXML
     private Label wlAdminPrivilegesLabel;
 
@@ -107,27 +131,51 @@ public class AnimeListController {
     private Label wlUsernameLabel;
 
     private Animelist animelist;
+    private Set<Integer> bannedAnimeIds = new HashSet<>();
 
     private String username;
     private boolean isAdmin;
 
     public void setUserInfo(String username, boolean isAdmin) {
         this.username = username;
+        this.isAdmin = isAdmin;
+
         alUsernameLabel.setText("User: " + username);
         wlUsernameLabel.setText("User: " + username);
 
-        this.isAdmin = isAdmin;
         alAdminPrivilegesLabel.setVisible(isAdmin);
         wlAdminPrivilegesLabel.setVisible(isAdmin);
     }
 
+    private void loadBannedAnimeIds() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/animelist/data/banned/banned.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                bannedAnimeIds.add(Integer.parseInt(line));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void updateTable() {
+        Set<Integer> addedAnimeIds = new HashSet<>();
+
+        ObservableList<Anime> animeList = FXCollections.observableArrayList();
+        for (Anime anime : animelist.getAnimelist()) {
+            if (!bannedAnimeIds.contains(anime.getId()) && addedAnimeIds.add(anime.getId())) {
+                animeList.add(anime);
+            }
+        }
+
         int fromIndex = currentPage * ROWS_PER_PAGE;
-        int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, animelist.getAnimelist().size());
-        alTable.setItems(FXCollections.observableArrayList(animelist.getAnimelist().subList(fromIndex, toIndex)));
+        int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, animeList.size());
+
+        ObservableList<Anime> subList = FXCollections.observableArrayList(animeList.subList(fromIndex, toIndex));
+        alTable.setItems(subList);
 
         alLeft.setVisible(currentPage > 0);
-        alRight.setVisible((currentPage + 1) * ROWS_PER_PAGE < animelist.getAnimelist().size());
+        alRight.setVisible((currentPage + 1) * ROWS_PER_PAGE < animeList.size());
     }
 
     @FXML
@@ -148,6 +196,8 @@ public class AnimeListController {
 
     @FXML
     public void initialize() {
+        loadBannedAnimeIds();
+
         alImageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
         alNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         alEpisodesColumn.setCellValueFactory(new PropertyValueFactory<>("episodes"));
@@ -180,11 +230,16 @@ public class AnimeListController {
         // Set buttons on the table
         alActionColumn.setCellFactory(param -> new TableCell<>() {
             private final Button banButton = new Button("Ban");
+            private final Button watchlistButton = new Button("Add to Watchlist");
 
             {
                 banButton.setOnAction(event -> {
                     Anime anime = getTableView().getItems().get(getIndex());
                     banAnime(anime);
+                });
+                watchlistButton.setOnAction(event -> {
+                    Anime anime = getTableView().getItems().get(getIndex());
+                    addToWatchlist(anime);
                 });
             }
 
@@ -194,7 +249,13 @@ public class AnimeListController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(banButton);
+                    VBox vBox = new VBox(5);
+                    if (isAdmin) {
+                        vBox.getChildren().addAll(banButton, watchlistButton);
+                    } else {
+                        vBox.getChildren().add(watchlistButton);
+                    }
+                    setGraphic(vBox);
                 }
             }
         });
@@ -207,12 +268,17 @@ public class AnimeListController {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/animelist/data/banned/banned.txt", true))) {
             writer.write(String.valueOf(anime.getId()));
             writer.newLine();
+            bannedAnimeIds.add(anime.getId());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         animelist.removeAnime(anime);
         updateTable();
+    }
+
+    private void addToWatchlist(Anime anime) {
+        // Placeholder method for adding to watchlist
     }
 
     @FXML

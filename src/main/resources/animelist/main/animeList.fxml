@@ -50,11 +50,11 @@
                <children>
                   <TableView fx:id="wlTable" layoutY="50.0" prefHeight="357.0" prefWidth="828.0">
                      <columns>
-                        <TableColumn prefWidth="99.0" text="image" />
+                        <TableColumn fx:id="wlImageColumn" prefWidth="99.0" text="image" />
                         <TableColumn prefWidth="165.0" text="name" />
                         <TableColumn prefWidth="95.0" text="episodes" />
                         <TableColumn prefWidth="85.0" text="year" />
-                        <TableColumn prefWidth="95.0" text="own score" />
+                        <TableColumn prefWidth="95.0" text="MAL score" />
                         <TableColumn prefWidth="144.0" text="genres" />
                         <TableColumn prefWidth="144.0" text="actions" />
                      </columns>
