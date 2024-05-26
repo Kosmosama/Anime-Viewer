@@ -2,6 +2,7 @@ package animelist.main;
 
 import animelist.common.list_related.Anime;
 import animelist.common.list_related.Animelist;
+import animelist.common.list_related.Watchlist;
 import animelist.common.other.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -136,6 +137,7 @@ public class AnimeListController {
 
     private String username;
     private boolean isAdmin;
+    private Watchlist watchlist;
 
     public void setUserInfo(String username, boolean isAdmin) {
         this.username = username;
@@ -159,25 +161,40 @@ public class AnimeListController {
         }
     }
 
-    // Handle watchlist
-
     @FXML
     void handleLeftButtonWl(MouseEvent event) {
         if (currentPageWl > 0) {
             currentPageWl--;
-//            updateTable();
+            updateWatchlistTable();
         }
     }
 
     @FXML
     void handleRightButtonWl(MouseEvent event) {
-//        if ((currentPageWl + 1) * ROWS_PER_PAGE < animelist.getWatchlist().size()) {
-//            currentPageWl++;
-//            updateTable();
-//        }
+        ObservableList<Anime> watchList = watchlist.getWatchlist();
+        if ((currentPageWl + 1) * ROWS_PER_PAGE < watchList.size()) {
+            currentPageWl++;
+            updateWatchlistTable();
+        }
     }
 
-    // Handle animelist
+    private void updateWatchlistTable() {
+        if (watchlist == null) {
+            return;
+        }
+
+        ObservableList<Anime> watchList = watchlist.getWatchlist();
+
+        int fromIndex = currentPageWl * ROWS_PER_PAGE;
+        int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, watchList.size());
+
+        ObservableList<Anime> subList = FXCollections.observableArrayList(watchList.subList(fromIndex, toIndex));
+        wlTable.setItems(subList);
+
+        wlLeft.setVisible(currentPageWl > 0);
+        wlRight.setVisible((currentPageWl + 1) * ROWS_PER_PAGE < watchList.size());
+    }
+
     private void updateTable() {
         Set<Integer> addedAnimeIds = new HashSet<>();
 
@@ -213,12 +230,20 @@ public class AnimeListController {
             updateTable();
         }
     }
-    //-----------------------
 
     @FXML
     public void initialize() {
         loadBannedAnimeIds();
+        setupColumns();
 
+        animelist = new Animelist();
+        watchlist = new Watchlist(username);
+
+        updateTable();
+        updateWatchlistTable();
+    }
+
+    private void setupColumns() {
         alImageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
         alNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         alEpisodesColumn.setCellValueFactory(new PropertyValueFactory<>("episodes"));
@@ -226,8 +251,22 @@ public class AnimeListController {
         alScoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
         alGenresColumn.setCellValueFactory(new PropertyValueFactory<>("genre"));
 
-        // Set images on the table
-        alImageColumn.setCellFactory(param -> new TableCell<>() {
+        wlImageColumn.setCellValueFactory(new PropertyValueFactory<>("imageUrl"));
+        wlNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        wlEpisodesColumn.setCellValueFactory(new PropertyValueFactory<>("episodes"));
+        wlYearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+        wlScoreColumn.setCellValueFactory(new PropertyValueFactory<>("score"));
+        wlGenresColumn.setCellValueFactory(new PropertyValueFactory<>("genre"));
+
+        // Set up cell factories for image and action columns
+        setupImageColumn(alImageColumn);
+        setupImageColumn(wlImageColumn);
+        setupActionColumn(alActionColumn);
+        setupActionColumn(wlActionColumn);
+    }
+
+    private void setupImageColumn(TableColumn<Anime, String> column) {
+        column.setCellFactory(param -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
             {
                 setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -247,9 +286,10 @@ public class AnimeListController {
                 }
             }
         });
+    }
 
-        // Set buttons on the table
-        alActionColumn.setCellFactory(param -> new TableCell<>() {
+    private void setupActionColumn(TableColumn<Anime, String> column) {
+        column.setCellFactory(param -> new TableCell<>() {
             private final Button banButton = new Button("Ban");
             private final Button watchlistButton = new Button("Add to Watchlist");
 
@@ -280,9 +320,6 @@ public class AnimeListController {
                 }
             }
         });
-
-        animelist = new Animelist();
-        updateTable();
     }
 
     private void banAnime(Anime anime) {
@@ -299,7 +336,13 @@ public class AnimeListController {
     }
 
     private void addToWatchlist(Anime anime) {
-        // Placeholder method for adding to watchlist
+        watchlist.addAnime(anime);
+        updateWatchlistTable();
+    }
+
+    private void removeFromWatchlist(Anime anime) {
+        watchlist.removeAnime(anime);
+        updateWatchlistTable();
     }
 
     @FXML
