@@ -97,7 +97,7 @@ public class LogInController {
         }
 
         User newUser = new User(username.toLowerCase(), password);
-        if (newUser.exists() == 0) {
+        if (newUser.exists() >= 0) {
             Utils.showAlert("Username already exists. Please choose a different username.");
             return;
         }

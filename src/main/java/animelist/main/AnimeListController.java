@@ -301,6 +301,7 @@ public class AnimeListController {
                     rescueInitializator();
                     Anime anime = getTableView().getItems().get(getIndex());
                     addToWatchlist(anime);
+//                    watchlistButton.setVisible(false);
                 });
             }
 
