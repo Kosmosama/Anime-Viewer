@@ -298,10 +298,10 @@ public class AnimeListController {
                     banAnime(anime);
                 });
                 watchlistButton.setOnAction(event -> {
-                    rescueInitializator();
+                    rescueInitializer();
                     Anime anime = getTableView().getItems().get(getIndex());
                     addToWatchlist(anime);
-//                    watchlistButton.setVisible(false);
+                    watchlistButton.setVisible(false);
                 });
             }
 
@@ -375,7 +375,7 @@ public class AnimeListController {
         updateWatchlistTable();
     }
 
-    private void rescueInitializator() {
+    private void rescueInitializer() {
         if (watchlist == null) {
             watchlist = new Watchlist(username);
             updateWatchlistTable();
@@ -394,7 +394,7 @@ public class AnimeListController {
 
     @FXML
     void showWatchList(MouseEvent event) {
-        rescueInitializator();
+        rescueInitializer();
         Utils.fadeInNode(watchListBorderPane);
         Utils.fadeOutNode(animeListBorderPane);
         watchListBorderPane.toFront();
